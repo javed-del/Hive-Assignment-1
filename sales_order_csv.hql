@@ -62,11 +62,11 @@ DEALSIZE string
 stored as orc;
 insert into sales_order_orc select * from sales_order_csv;
 select year_id,sum(sales) from sales_order_orc group by year_id;
-select PRODUCTLINE,count(ORDERNUMBER) as frequency from sales_order_csv  group by PRODUCTLINE order by frequency desc limit 1;
+select PRODUCTLINE,count(ORDERNUMBER) as frequency from sales_order_orc  group by PRODUCTLINE order by frequency desc limit 1;
 select QTR_ID,round(sum(sales)) as TotalSales from sales_order_orc group by QTR_ID;
-create table quarter_sales as select QTR_ID,round(sum(sales),2) as TotalSales from sales_order_csv group by QTR_ID;
+create table quarter_sales as select QTR_ID,round(sum(sales),2) as TotalSales from sales_order_orc group by QTR_ID;
 select QTR_ID,TotalSales from quarter_sales order by TotalSales asc limit 1;
-create table country_sales as select COUNTRY,round(sum(sales),2) as totalSales from sales_order_csv group by COUNTRY ;
+create table country_sales as select COUNTRY,round(sum(sales),2) as totalSales from sales_order_orc group by COUNTRY ;
 select * from country_sales order by totalSales desc limit 1;
 select * from country_sales order by totalSales asc limit 1;
 select s1.QTR_ID,country,TotalSales from sales_order_orc s1 join (select * from quarter_sales) s2 on s1.QTR_ID=s2.QTR_ID order by QTR_ID;

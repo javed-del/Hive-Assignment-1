@@ -69,4 +69,5 @@ select QTR_ID,TotalSales from quarter_sales order by TotalSales asc limit 1;
 create table country_sales as select COUNTRY,round(sum(sales),2) as totalSales from sales_order_csv group by COUNTRY ;
 select * from country_sales order by totalSales desc limit 1;
 select * from country_sales order by totalSales asc limit 1;
+select s1.QTR_ID,country,TotalSales from sales_order_orc s1 join (select * from quarter_sales) s2 on s1.QTR_ID=s2.QTR_ID order by QTR_ID;
 

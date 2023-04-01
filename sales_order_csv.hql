@@ -70,4 +70,3 @@ create table country_sales as select COUNTRY,round(sum(sales),2) as totalSales f
 select * from country_sales order by totalSales desc limit 1;
 select * from country_sales order by totalSales asc limit 1;
 
-select * from country_sales order by totalSales asc limit 1;

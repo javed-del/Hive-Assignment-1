@@ -70,4 +70,5 @@ create table country_sales as select COUNTRY,round(sum(sales),2) as totalSales f
 select * from country_sales order by totalSales desc limit 1;
 select * from country_sales order by totalSales asc limit 1;
 select s1.QTR_ID,country,TotalSales from sales_order_orc s1 join (select * from quarter_sales) s2 on s1.QTR_ID=s2.QTR_ID order by QTR_ID;
-
+create table monthly_max as select YEAR_ID,max(quantityordered) as quantityordered1 from sales_order_orc group by YEAR_ID ;
+select YEAR_ID,month_id,quantityordered1 from monthly_max s1 join (select month_id,quantityordered from sales_order_orc) s2 on s1.quantityordered1=s2.quantityordered ;
